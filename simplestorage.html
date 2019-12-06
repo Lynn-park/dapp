@@ -253,7 +253,7 @@
             });
         }
         function getScore() {
-            simpleStorage.getScore(function (e, r) {
+            simpleStorage.get(function (e, r) {
                 document.getElementById('storedScore').innerHTML = r.toNumber();
             });
             web3.eth.getBlockNumber(function (e, r) {
@@ -289,7 +289,7 @@
             });
             var filter = web3.eth.filter('latest');
             filter.watch(function (e, r) {
-                getScore();
+                get();
                 web3.eth.getTransaction(txid, function (e, r) {
                     if (r != null && r.blockNumber > 0) {
                         document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
