@@ -303,7 +303,7 @@
         function setScore() {
             var newValue = document.getElementById('newScore').value;
             var txid
-            simpleStorage.setScore(newValue, function (e, r) {
+            simpleStorage.set(newValue, function (e, r) {
                 document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
                 txid = r;
             });
