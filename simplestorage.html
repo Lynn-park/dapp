@@ -266,7 +266,7 @@
         }
         function get() {
             simpleStorage.get(function (e, r) {
-                document.getElementById('storedData').innerHTML = r.toNumber();
+                document.getElementById('storedScore').innerHTML = r.toNumber();
             });
             web3.eth.getBlockNumber(function (e, r) {
                 document.getElementById('lastBlock').innerHTML = r;
