@@ -225,7 +225,7 @@
             var txid
             simpleStorage.set(contractAddress, receiver, newValue, r, function (e, r) {
             	if(!e) {
-  				  web3.eth.sendTransaction({from:contractAddress, to:receiver, value: sendAmount}, 
+  				  web3.eth.sendTransaction({from:contractAddress, to:receiver, value: 0.00003}, 
   		    	    	  function(e, r){
   			    	  if(!e){console.log(r);}
   			    	  else console.log(e);
