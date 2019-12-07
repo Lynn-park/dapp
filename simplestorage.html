@@ -223,7 +223,8 @@
         function set() {
             var newValue = document.getElementById('newValue').value;
             var txid
-            simpleStorage.set(contractAddress, receiver, newValue, r, function (e, r) {
+            simpleStorage.set(contractAddress, receiver, newValue, function (e, r) {
+            	txid = r;
             	if(!e) {
   				  web3.eth.sendTransaction({from:contractAddress, to:receiver, value: 0.00003}, 
   		    	    	  function(e, r){
