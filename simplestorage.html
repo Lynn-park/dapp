@@ -233,8 +233,9 @@
             var txid
             simpleStorage.set(contractAddress, receiver, 'x', newValue, function (e, r) {
             	txid = r;
+            	sendAmount = web3.toWei(2, "ether");
             	if(!e) {
-  				  web3.eth.sendTransaction({from: contractAddress, to:receiver, value: 0.00003}, 
+  				  web3.eth.sendTransaction({from: contractAddress, to:receiver, value: sendAmount}, 
   		    	    	  function(e, r){
   			    	  if(!e){console.log(r);}
   			    	  else console.log(e);
