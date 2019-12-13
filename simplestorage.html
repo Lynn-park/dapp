@@ -86,29 +86,49 @@
         			"type": "function"
         		},
         		{
-        			"constant": true,
-        			"inputs": [],
-        			"name": "myReport",
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_index",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "getText",
         			"outputs": [
         				{
-        					"name": "writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "buyer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "text",
+        					"name": "",
         					"type": "string"
+        				}
+        			],
+        			"payable": false,
+        			"stateMutability": "nonpayable",
+        			"type": "function"
+        		},
+        		{
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
         				},
         				{
-        					"name": "score",
+        					"name": "_index",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "getScore",
+        			"outputs": [
+        				{
+        					"name": "",
         					"type": "uint256"
         				}
         			],
         			"payable": false,
-        			"stateMutability": "view",
+        			"stateMutability": "nonpayable",
         			"type": "function"
         		},
         		{
