@@ -209,6 +209,7 @@
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+                console.log(accountAddr);
             });
             init();
         }
