@@ -55,6 +55,7 @@
     <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
     <script>
+        var userAddress;
         var contractAddress = '0x4d86b7c7af912f345b837ee7db40f2970e0eaa3e';
         var receiver = '0x1099140103CDbDC97c54D1A48Bb943B8CB29EC9b';
         var abi =
@@ -208,6 +209,7 @@
             document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
+                userAddress = getLink[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
                 console.log(accountAddr);
             });
@@ -219,9 +221,9 @@
         var text = "itwasgood";
         var score = 4.3;
         function init() {
-            shareport.setReview(accountAddr, contractAddress, text, score, function(e,r){
+            shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
-    				  web3.eth.sendTransaction({from:accountAddr, to:contractAddres, value: 0.00003}, 
+    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: 0.00003}, 
     		    	    	  function(e, r){
     			    	  if(!e){console.log(r);}
     			    	  else console.log(e);
