@@ -143,25 +143,19 @@
         var text = "itwasgood";
         var score = 4.3;
         function init() {
-        	 shareport.myReport(writer, buyer, text, score, function(error, result){
-        		 document.getElementById("writer").innerHTML=result[0];
-        		 document.getElementById("buyer").innerHTML=result[1];
-        		 document.getElementById("text").innerHTML=result[2];
-        		 document.getElementById("score").innerHTML=result[3];
-        		 });
-        	 
-        }
-        shareport.setReview(writer, recipient, reviews, score, function(e,r){
-			  if(!e) {
-				  web3.eth.sendTransaction({from:writer, to:recipient, value: 3}, 
-		    	    	  function(e, r){
-			    	  if(!e){console.log(r);}
-			    	  else console.log(e);
-		        	});
-				  console.log(r);
-			  }
-			  else console.log(e);
-		  });
+
+            shareport.setReview(writer, recipient, reviews, score, function(e,r){
+    			  if(!e) {
+    				  web3.eth.sendTransaction({from:writer, to:recipient, value: 3}, 
+    		    	    	  function(e, r){
+    			    	  if(!e){console.log(r);}
+    			    	  else console.log(e);
+    		        	});
+    				  console.log(r);
+    			  }
+    			  else console.log(e);
+    		  });
+            }
         
      </script>
 </body>
