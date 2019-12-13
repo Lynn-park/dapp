@@ -209,7 +209,7 @@
             document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
-                userAddress = getLink[0];
+                userAddress = getLink(r[0]);
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
                 console.log('userAdd', userAddress);
             });
