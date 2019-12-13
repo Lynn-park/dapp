@@ -60,6 +60,32 @@
         var abi =
         	[
         		{
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_buyer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_text",
+        					"type": "string"
+        				},
+        				{
+        					"name": "_score",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "setReview",
+        			"outputs": [],
+        			"payable": false,
+        			"stateMutability": "nonpayable",
+        			"type": "function"
+        		},
+        		{
         			"constant": true,
         			"inputs": [],
         			"name": "myReport",
@@ -139,7 +165,7 @@
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var writer = "0xefC85CD6B4BAbB4E09244Bc58f66F75f7fcD2da7";
-        var buyer = "0x1099140103CDbDC97c54D1A48Bb943B8CB29EC9b";
+        var buyer = "0xD476f4Bf3140C28343ce12a5255bB540ABF06Ac1";
         var text = "itwasgood";
         var score = 4.3;
         function init() {
