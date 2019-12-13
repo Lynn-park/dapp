@@ -144,7 +144,7 @@
         var score = 4.3;
         function init() {
 
-            shareport.setReview(writer, buyer, reviews, score, function(e,r){
+            shareport.setReview(writer, buyer, text, score, function(e,r){
     			  if(!e) {
     				  web3.eth.sendTransaction({from:writer, to:buyer, value: 3}, 
     		    	    	  function(e, r){
