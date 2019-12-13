@@ -6,7 +6,7 @@
     <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
     <link rel="stylesheet" type="text/css"
         href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.2.3/milligram.min.css">
-    <title>Simple Storage Dapp 예제 </title>
+    <title>주문/결제</title>
     <style>
         body {
             margin-left: 50px;
@@ -24,14 +24,14 @@
 </head>
 
 <body>
-    <h3>Simple Storage dApp 예제</h3>
+    <h3>주문/결제</h3>
     <ul>
         <li>컨트랙트 주소: <span id="contractAddr"></span></li>
         <li>내 어카운트 주소: <span id="accountAddr"></span></li>
         <li>컨트랙트에 저장된 data: <span id="storedData"></span>
         <li>컨트랙트에 저장된 score: <span id="storedScore"></span>        
             <button onclick="reLoad()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
-        <li>값: <input id="newValue" type="text"><button onclick="set()">확인</button>
+        <li>값: <input id="newValue" type="text"><button onclick="set()">확인</button>ㅋ
         <li>점수: <input id="newScore" type="text"><button onclick="setScore()">확인</button>
             <div id="result"></div>
         </li>
@@ -86,29 +86,49 @@
         			"type": "function"
         		},
         		{
-        			"constant": true,
-        			"inputs": [],
-        			"name": "myReport",
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_index",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "getText",
         			"outputs": [
         				{
-        					"name": "writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "buyer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "text",
+        					"name": "",
         					"type": "string"
+        				}
+        			],
+        			"payable": false,
+        			"stateMutability": "nonpayable",
+        			"type": "function"
+        		},
+        		{
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
         				},
         				{
-        					"name": "score",
+        					"name": "_index",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "getScore",
+        			"outputs": [
+        				{
+        					"name": "",
         					"type": "uint256"
         				}
         			],
         			"payable": false,
-        			"stateMutability": "view",
+        			"stateMutability": "nonpayable",
         			"type": "function"
         		},
         		{
@@ -212,6 +232,27 @@
     			  else console.log(e);
     		  });
             }
+        function getReviewLength() {
+        	
+        }
+        function getScore() {
+        	shareport.getScore(writer, 0)  function(e,r){
+        		if(!e) {
+                	var score = r;
+                	document.getElementById('storedData').innerHTML = r.toNumber();
+        		}
+        		else console.log(e);
+        	}
+        }
+        function getText() {
+        	shareport.getText(writer, 0)  function(e,r){
+        		if(!e) {
+        			var text = r;
+        			document.getElementById('storedScore').innerHTML = r;
+        		}
+        		else console.log(e);
+        	}
+        }
      </script>
 </body>
 
