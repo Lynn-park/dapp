@@ -60,6 +60,32 @@
         var abi =
         	[
         		{
+        			"constant": false,
+        			"inputs": [
+        				{
+        					"name": "_writer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_buyer",
+        					"type": "address"
+        				},
+        				{
+        					"name": "_text",
+        					"type": "string"
+        				},
+        				{
+        					"name": "_score",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "setReview",
+        			"outputs": [],
+        			"payable": false,
+        			"stateMutability": "nonpayable",
+        			"type": "function"
+        		},
+        		{
         			"constant": true,
         			"inputs": [],
         			"name": "myReport",
@@ -143,7 +169,6 @@
         var text = "itwasgood";
         var score = 4.3;
         function init() {
-
             shareport.setReview(writer, buyer, text, score, function(e,r){
     			  if(!e) {
     				  web3.eth.sendTransaction({from:writer, to:buyer, value: 3}, 
