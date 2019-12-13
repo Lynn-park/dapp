@@ -143,7 +143,7 @@
         var text = "itwasgood";
         var score = 4.3;
         function init() {
-        	 shareport.myReport( function(error, result){
+        	 shareport.myReport( function(writer, buyer, text, score, error, result){
         		 document.getElementById("writer").innerHTML=result[0];
         		 document.getElementById("buyer").innerHTML=result[1];
         		 document.getElementById("text").innerHTML=result[2];
