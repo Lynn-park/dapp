@@ -213,14 +213,14 @@
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
                 console.log('userAdd', userAddress);
             });
-            init();
+            init(userAddress);
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var text = "itwasgood";
         var score = 4.3;
-        function init() {
+        function init(userAddress) {
 			  console.log('initAdd', userAddress);
             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
