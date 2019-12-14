@@ -212,6 +212,7 @@
                 userAddress = r[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
             });
+            console.log(userAddress);
             init(userAddress);
         }
         function getLink(addr) {
