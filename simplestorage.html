@@ -213,7 +213,8 @@
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
             });
             console.log(userAddress);
-            init(userAddress);
+            console.log('r', r[0]);
+            init('userAdd', userAddress);
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
