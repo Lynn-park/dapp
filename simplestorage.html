@@ -220,11 +220,12 @@
         }
         var text = "itwasgood";
         var score = 4.3;
+        var wei = web3.toWei(3, "ether");
         function init(userAddress) {
 			  console.log('initAdd', userAddress);
             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
-    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: 0.00003}, 
+    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: wei}, 
     		    	    	  function(e, r){
     			    	  if(!e){console.log(r);}
     			    	  else console.log(e);
