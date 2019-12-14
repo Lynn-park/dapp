@@ -219,9 +219,9 @@
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var text = "itwasgood";
-        var score = 4.3;
+        var score = 4;
         function init() {
-            shareport.setReview(contractAddress, userAddress, text,function(e,r) {
+            shareport.setReview(contractAddress, userAddress, text, score, function(e,r) {
     			  if(!e) {
     				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: 0.00003}, 
     		    	    	  function(e, r){
@@ -233,6 +233,14 @@
     			  else console.log(e);
     		  });
             }
+        
+        function getScore() {
+        	
+        }
+        function getText() {
+        	
+        }
+        
      </script>
 </body>
 
