@@ -211,7 +211,6 @@
                 //alert(getLink(r[0]));
                 userAddress = r[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
-                console.log('userAdd', userAddress);
             });
             init();
         }
@@ -221,6 +220,10 @@
         var text = "itwasgood";
         var score = 4;
         function init() {
+            console.log('userAdd', userAddress);
+            console.log('contAdd', contractAddress);
+            console.log('text', text);
+            console.log('score', score);
             shareport.setReview(contractAddress, userAddress, text, score, function(e,r) {
     			  if(!e) {
     				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: 0.00003}, 
