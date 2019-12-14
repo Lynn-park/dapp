@@ -212,14 +212,14 @@
                 userAddress = r[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
             });
-            init();
+            init(userAddress);
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var text = "itwasgood";
         var score = 4;
-        function init() {
+        function init(userAddress) {
             console.log('userAdd', userAddress);
             console.log('contAdd', contractAddress);
             console.log('text', text);
