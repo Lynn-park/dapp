@@ -210,23 +210,18 @@
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
                 userAddress = r[0];
-                console.log('r', userAddress);
-                documentr[0]ElementById('accountAddr').innerHTML = getLink(r[0]);
+                document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+                console.log('userAdd', userAddress);
             });
-            console.log(userAddress);
-            init('userAdd', userAddress);
+            init();
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var text = "itwasgood";
-        var score = 4;
-        function init(userAddress) {
-            console.log('userAdd', userAddress);
-            console.log('contAdd', contractAddress);
-            console.log('text', text);
-            console.log('score', score);
-            shareport.setReview(contractAddress, userAddress, text, score, function(e,r) {
+        var score = 4.3;
+        function init() {
+            shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
     				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: 0.00003}, 
     		    	    	  function(e, r){
@@ -238,14 +233,6 @@
     			  else console.log(e);
     		  });
             }
-        
-        function getScore() {
-        	
-        }
-        function getText() {
-        	
-        }
-        
      </script>
 </body>
 
