@@ -210,10 +210,10 @@
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
                 userAddress = r[0];
-                document.getElementById('accountAddr').innerHTML = getLink(r[0]);
+                console.log('r', userAddress);
+                documentr[0]ElementById('accountAddr').innerHTML = getLink(r[0]);
             });
             console.log(userAddress);
-            console.log('r', r[0]);
             init('userAdd', userAddress);
         }
         function getLink(addr) {
