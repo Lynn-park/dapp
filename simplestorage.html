@@ -76,7 +76,7 @@
         				},
         				{
         					"name": "_score",
-        					"type": "uint256"
+        					"type": "string"
         				}
         			],
         			"name": "setReview",
@@ -124,7 +124,7 @@
         			"outputs": [
         				{
         					"name": "",
-        					"type": "uint256"
+        					"type": "string"
         				}
         			],
         			"payable": false,
@@ -155,7 +155,7 @@
         				},
         				{
         					"name": "score",
-        					"type": "uint256"
+        					"type": "string"
         				}
         			],
         			"payable": false,
@@ -219,8 +219,20 @@
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
         var text = "itwasgood";
-        var score = 4.3;
+        var score = '4.3';
+        // score : 0 ~ 5
+        
         var wei = web3.toWei(3, "ether");
+        if (score < 2) {
+           wei = web3.toWei(3, "ether");
+        }
+        else if (score <4) {
+        	wei = web3.toWei(4, "ether");
+        } 
+        else {
+        	wei = web3.toWei(5, "ether");
+        }
+        
         function init(userAddress) {
 			  console.log('initAdd', userAddress);
             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
