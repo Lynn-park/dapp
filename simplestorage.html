@@ -211,8 +211,8 @@
                 userAddress = r[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
                 console.log('userAdd', userAddress);
-                console.log('pass', userAddress);
-                init(userAddress);
+               // init(userAddress);
+                setValue();
             });
         }
         function getLink(addr) {
@@ -235,13 +235,21 @@
         
         function init(userAddress) {
             console.log('initAdd', userAddress);
-             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
+             shareport.setReview(contractAddress, userAddress, text, score, function(e,r){
                 if(!e) {
                    console.log(r);
                 }
                 else console.log(e);
              });
        }
+       function setValue() {
+    	   var newValue = 3;
+    	   var txid
+    	   simpleStorage.set(newValue, function(e,r){
+    	     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+    	     txid = r;
+    	   });
+    	 }
      </script>
 </body>
 
