@@ -258,10 +258,6 @@
         function setValue(userAddress) {
             var newValue = document.getElementById('newValue').value;
             var txid
-            shareport.set(newValue, function (e, r) {
-                document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-                txid = r;
-            });
             shareport.setReview(contractAddress, userAddress, text, score, function(e,r){
                 if(!e) {
                    console.log(r);
