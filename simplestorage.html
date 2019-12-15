@@ -178,7 +178,7 @@
             } else {
                 console.log('No web3? You should consider trying MetaMask!')
                 // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-                window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+                window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
             }
             // Now you can start your app & access web3 freely:
             startApp();
@@ -224,13 +224,13 @@
         
         var wei = web3.toWei(3, "ether");
         if (score < 2) {
-           wei = web3.toWei(3, "ether");
+           wei = web3.toWei(1, "ether");
         }
         else if (score <4) {
-        	wei = web3.toWei(4, "ether");
+        	wei = web3.toWei(2, "ether");
         } 
         else {
-        	wei = web3.toWei(5, "ether");
+        	wei = web3.toWei(3, "ether");
         }
         
         function init(userAddress) {
