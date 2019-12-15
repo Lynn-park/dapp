@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -11,11 +12,13 @@
         body {
             margin-left: 50px;
         }
+
         #storedData {
             font-size: 300%;
             margin-right: 10px;
         }
-        #newScore {
+
+        #newValue {
             width: 200px;
             margin-right: 10px;
             text-align: right;
@@ -28,11 +31,9 @@
     <ul>
         <li>컨트랙트 주소: <span id="contractAddr"></span></li>
         <li>내 어카운트 주소: <span id="accountAddr"></span></li>
-        <li>컨트랙트에 저장된 data: <span id="storedData"></span>
-        <li>컨트랙트에 저장된 score: <span id="storedScore"></span>        
-            <button onclick="reLoad()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
-        <li>값: <input id="newValue" type="text"><button onclick="set()">확인</button>
-        <li>점수: <input id="newScore" type="text"><button onclick="setScore()">확인</button>
+        <li>컨트랙트에 저장된 값: <span id="storedData"></span>
+            <button onclick="getValue()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
+        <li><input id="newValue" type="text"><button onclick="setValue()">새 값으로 저장하기</button>
             <div id="result"></div>
         </li>
         <li>새 값을 저장한 후 팬딩 트랜잭션이 블록에 포함되면 자동으로 페이지가 업데이트될 것입니다.</li>
@@ -55,135 +56,10 @@
     <script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
     <!-- <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script> -->
     <script>
-        var userAddress;
-        var contractAddress = '0x8c7983b49bb6e35f1d06b8a3bb95f46f51e75a18';
-        var abi =
-        	[
-        		{
-        			"constant": false,
-        			"inputs": [
-        				{
-        					"name": "_writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "_buyer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "_text",
-        					"type": "string"
-        				},
-        				{
-        					"name": "_score",
-        					"type": "string"
-        				}
-        			],
-        			"name": "setReview",
-        			"outputs": [],
-        			"payable": false,
-        			"stateMutability": "nonpayable",
-        			"type": "function"
-        		},
-        		{
-        			"constant": false,
-        			"inputs": [
-        				{
-        					"name": "_writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "_index",
-        					"type": "uint256"
-        				}
-        			],
-        			"name": "getText",
-        			"outputs": [
-        				{
-        					"name": "",
-        					"type": "string"
-        				}
-        			],
-        			"payable": false,
-        			"stateMutability": "nonpayable",
-        			"type": "function"
-        		},
-        		{
-        			"constant": false,
-        			"inputs": [
-        				{
-        					"name": "x",
-        					"type": "uint256"
-        				}
-        			],
-        			"name": "setData",
-        			"outputs": [],
-        			"payable": false,
-        			"stateMutability": "nonpayable",
-        			"type": "function"
-        		},
-        		{
-        			"constant": false,
-        			"inputs": [
-        				{
-        					"name": "_writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "_index",
-        					"type": "uint256"
-        				}
-        			],
-        			"name": "getScore",
-        			"outputs": [
-        				{
-        					"name": "",
-        					"type": "string"
-        				}
-        			],
-        			"payable": false,
-        			"stateMutability": "nonpayable",
-        			"type": "function"
-        		},
-        		{
-        			"constant": true,
-        			"inputs": [
-        				{
-        					"name": "",
-        					"type": "uint256"
-        				}
-        			],
-        			"name": "reports",
-        			"outputs": [
-        				{
-        					"name": "writer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "buyer",
-        					"type": "address"
-        				},
-        				{
-        					"name": "text",
-        					"type": "string"
-        				},
-        				{
-        					"name": "score",
-        					"type": "string"
-        				}
-        			],
-        			"payable": false,
-        			"stateMutability": "view",
-        			"type": "function"
-        		}
-        	];
-        
-        var shareportContract;
-        var shareport;
-        
-        var reportScore = 4.5;
-        var tex = 'good';
-        
+        var contractAddress = '0x4d86b7c7af912f345b837ee7db40f2970e0eaa3e';
+        var abi = [{ "constant": false, "inputs": [{ "name": "x", "type": "uint256" }], "name": "set", "outputs": [], "payable": false, "type": "function" }, { "constant": true, "inputs": [], "name": "get", "outputs": [{ "name": "", "type": "uint256" }], "payable": false, "type": "function" }];
+        var simpleStorageContract;
+        var simpleStorage;
         window.addEventListener('load', function () {
             // Checking if Web3 has been injected by the browser (Mist/MetaMask)
             if (typeof web3 !== 'undefined') {
@@ -192,7 +68,7 @@
             } else {
                 console.log('No web3? You should consider trying MetaMask!')
                 // fallback - use your fallback strategy (local node / hosted node + in-dapp id mgmt / fail)
-                window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+                window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
             }
             // Now you can start your app & access web3 freely:
             startApp();
@@ -217,54 +93,49 @@
             else {
                 alert('You have to install MetaMask !');
             }
-            shareportContract = web3.eth.contract(abi);
-            shareport = shareportContract.at(contractAddress);
+            simpleStorageContract = web3.eth.contract(abi);
+            simpleStorage = simpleStorageContract.at(contractAddress);
+
             document.getElementById('contractAddr').innerHTML = getLink(contractAddress);
+
             web3.eth.getAccounts(function (e, r) {
                 //alert(getLink(r[0]));
-                userAddress = r[0];
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
-                console.log('userAdd', userAddress);
-               // init(userAddress);
-                setValue();
             });
+            getValue();
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
         }
-        var text = "itwasgood";
-        var score = 4.3;
-        // score : 0 ~ 5
-        
-        var send;
-        if (score < 2) {
-           send = web3.toWei(10, "ether");
+        function getValue() {
+            simpleStorage.get(function (e, r) {
+                document.getElementById('storedData').innerHTML = r.toNumber();
+            });
+            web3.eth.getBlockNumber(function (e, r) {
+                document.getElementById('lastBlock').innerHTML = r;
+            });
         }
-        else if (score < 4) {
-        	send = web3.toWei(20, "ether");
-        } 
-        else {
-        	send = web3.toWei(30, "ether");
+        function setValue() {
+            var newValue = document.getElementById('newValue').value;
+            var txid
+            simpleStorage.setData(newValue, function (e, r) {
+                document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
+                txid = r;
+            });
+            var filter = web3.eth.filter('latest');
+            filter.watch(function (e, r) {
+                getValue();
+                web3.eth.getTransaction(txid, function (e, r) {
+                    if (r != null && r.blockNumber > 0) {
+                        document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
+                        document.getElementById('pending').style.cssText = 'color:green;';
+                        document.getElementById('storedData').style.cssText = 'color:green; font-size:300%;';
+                        filter.stopWatching();
+                    }
+                });
+            });
         }
-        
-        function init(userAddress) {
-            console.log('initAdd', userAddress);
-             shareport.setReview(contractAddress, userAddress, text, score, function(e,r){
-                if(!e) {
-                   console.log(r);
-                }
-                else console.log(e);
-             });
-       }
-       function setValue() {
-    	   var newValue = 3;
-    	   var txid
-    	   shareport.setData(newValue, function(e,r){
-    	     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
-    	     txid = r;
-    	   });
-    	 }
-     </script>
+    </script>
 </body>
 
 </html>
