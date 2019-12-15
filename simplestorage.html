@@ -112,6 +112,20 @@
         			"constant": false,
         			"inputs": [
         				{
+        					"name": "x",
+        					"type": "uint256"
+        				}
+        			],
+        			"name": "setData",
+        			"outputs": [],
+        			"payable": false,
+        			"stateMutability": "nonpayable",
+        			"type": "function"
+        		},
+        		{
+        			"constant": false,
+        			"inputs": [
+        				{
         					"name": "_writer",
         					"type": "address"
         				},
@@ -245,7 +259,7 @@
        function setValue() {
     	   var newValue = 3;
     	   var txid
-    	   simpleStorage.set(newValue, function(e,r){
+    	   shareport.set(newValue, function(e,r){
     	     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     	     txid = r;
     	   });
