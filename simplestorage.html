@@ -263,7 +263,7 @@
         
         function init(userAddress) {
            console.log('initAdd', userAddress);
-            shareport.set(text, function(e,r){
+            shareport.set(score, function(e,r){
                if(!e) {
                   web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: send}, 
                           function(e, r){
