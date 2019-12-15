@@ -259,7 +259,7 @@
             var newValue = document.getElementById('newValue').value;
             var txid
             console.log('user', userAddress);
-            shareport.set(userAddress, function(e,r){
+            shareport.set('a', function(e,r){
                 if(!e) {
                    console.log(r);
                 }
