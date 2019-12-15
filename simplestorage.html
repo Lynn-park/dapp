@@ -256,6 +256,7 @@
             });
         }
         function setValue(userAddress) {
+        	console.log(userAddress);
             shareport.setReview(contractAddress, userAddress, text, score, function(e,r){
                 if(!e) {
                    console.log(r);
