@@ -259,7 +259,7 @@
        function setValue() {
     	   var newValue = 3;
     	   var txid
-    	   shareport.set(newValue, function(e,r){
+    	   shareport.setData(newValue, function(e,r){
     	     document.getElementById('result').innerHTML = 'Transaction id: ' + r + '<span id="pending" style="color:red;">(Pending)</span>';
     	     txid = r;
     	   });
