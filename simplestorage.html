@@ -32,7 +32,6 @@
         <li>컨트랙트 주소: <span id="contractAddr"></span></li>
         <li>내 어카운트 주소: <span id="accountAddr"></span></li>
         <li>컨트랙트에 저장된 값: <span id="storedData"></span>
-            <button onclick="getValue()">새로고침</button> (현재블록: <span id="lastBlock"></span>)</li>
         <li><input id="newValue" type="text"><button onclick="setValue()">새 값으로 저장하기</button>
             <div id="result"></div>
         </li>
@@ -219,18 +218,9 @@
                 //alert(getLink(r[0]));
                 document.getElementById('accountAddr').innerHTML = getLink(r[0]);
             });
-            getValue();
         }
         function getLink(addr) {
             return '<a target="_blank" href=https://ropsten.etherscan.io/address/' + addr + '>' + addr + '</a>';
-        }
-        function getValue() {
-            simpleStorage.get(function (e, r) {
-                document.getElementById('storedData').innerHTML = r.toNumber();
-            });
-            web3.eth.getBlockNumber(function (e, r) {
-                document.getElementById('lastBlock').innerHTML = r;
-            });
         }
         function setValue() {
             var newValue = document.getElementById('newValue').value;
@@ -241,7 +231,7 @@
             });
             var filter = web3.eth.filter('latest');
             filter.watch(function (e, r) {
-                getValue();
+
                 web3.eth.getTransaction(txid, function (e, r) {
                     if (r != null && r.blockNumber > 0) {
                         document.getElementById('pending').innerHTML = '(기록된 블록: ' + r.blockNumber + ')';
