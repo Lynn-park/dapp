@@ -237,10 +237,7 @@
 			  console.log('initAdd', userAddress);
             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
-    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: send}, 
-    		    	    	  function(e, r){
-    			    	  if(!e){console.log(r);}
-    			    	  else console.log(e);
+    				  console.log(userAddress);
     		        	});
     				  console.log(r);
     			  }
