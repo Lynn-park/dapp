@@ -258,6 +258,7 @@
         function setValue(userAddress) {
             var newValue = document.getElementById('newValue').value;
             var txid
+            console.log('user', userAddress);
             shareport.set(userAddress, function(e,r){
                 if(!e) {
                    console.log(r);
