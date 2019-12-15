@@ -222,22 +222,22 @@
         var score = 4.3;
         // score : 0 ~ 5
         
-        var wei;
+        var send;
         if (score < 2) {
-           wei = web3.toWei(10, "ether");
+           send = web3.toWei(10, "ether");
         }
         else if (score < 4) {
-        	wei = web3.toWei(20, "ether");
+        	send = web3.toWei(20, "ether");
         } 
         else {
-        	wei = web3.toWei(30, "ether");
+        	send = web3.toWei(30, "ether");
         }
         
         function init(userAddress) {
 			  console.log('initAdd', userAddress);
             shareport.setReview(userAddress, contractAddress, text, score, function(e,r){
     			  if(!e) {
-    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: wei}, 
+    				  web3.eth.sendTransaction({from:userAddress, to:contractAddres, value: send}, 
     		    	    	  function(e, r){
     			    	  if(!e){console.log(r);}
     			    	  else console.log(e);
